@@ -22,19 +22,20 @@ print(macbeth[:500])
 ```
 
     <class 'str'>
-    119846
-    ﻿***The Project Gutenberg's Etext of Shakespeare's First Folio***
+    120253
+    ﻿
+    
+    ***The Project Gutenberg's Etext of Shakespeare's First Folio***
     ********************The Tragedie of Macbeth*********************
     
-    This is our 3rd edition of most of these plays.  See the index.
     
     
-    Copyright laws are changing all over the world, be sure to check
-    the copyright laws for your country before posting these files!!
-    
-    Please take a look at the important information in this header.
-    We encourage you to keep this file on your own disk, keeping an
-    electronic path open for the nex
+    *******************************************************************
+    THIS EBOOK WAS ONE OF PROJECT GUTENBERG'S EARLY FILES PRODUCED AT A
+    TIME WHEN PROOFING METHODS AND TOOLS WERE NOT WELL DEVELOPED. THERE
+    IS AN IMPROVED EDITION OF THIS TITLE WHICH MAY BE VIEWED AS EBOOK
+    (#1533) at https://www.gutenberg.org/ebooks/1533
+    *********************************
 
 
 ## Your Task
@@ -46,16 +47,62 @@ A common python programming pattern to counting objects, produce histograms, or 
 
 
 ```python
+import matplotlib.pyplot as plt
+%matplotlib inline
+
 # Your code here
 
 # Pseudo-code Outline
+
 # Split the transcript into words
+
+# Convert all text to lowercase
+macbeth = macbeth.lower()
+# Split transcript into words
+macbeth = macbeth.split()
+# Strip * from words
+macbeth = [string.strip("*") for string in macbeth]
+
+print(f"Total number of words: {len(macbeth)}")
+
 # Create a dictionary
+words = {}
+
 # Iterate through the text of Macbeth
 # Update word counts
+for word in macbeth:
+    if word in words.keys():
+        words[word] += 1
+    else:
+        words[word] = 0
+
 # Create Bar Graph
+counts = list(words.values())
+keys = list(words.keys())
+
+sorted_pairs = list(sorted(zip(counts, keys), reverse=True))
+sorted_values, sorted_keys = zip(*sorted_pairs)
+
+plt.figure(figsize=(16,6))
+plt.bar(sorted_keys[0:26], sorted_values[0:26], color="green")
+
 # Include descriptive titles and labels
+plt.title("Top 25 Word Counts for Macbeth")
+plt.ylabel("Counts")
+plt.xlabel("Words")
+plt.show()
+
+
+
+
 ```
+
+    Total number of words: 20389
+
+
+
+![png](index_files/index_3_1.png)
+
 
 ## Level Up (Optional)
 This project should take you about an hour and a half to complete. If you're done much more quickly than that and are not behind in the course, feel free to deepen your knowledge by completing any or all of the following tasks until you run out of time:
